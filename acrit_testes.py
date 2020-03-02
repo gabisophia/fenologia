@@ -338,3 +338,4 @@ a = 2
 print (fa(u, acrit, a))
 
 
+#a_crit = np.linspace(start = 0.1, stop = 8.3, num = 100)

@@ -1,43 +1,57 @@
-# In[1]: descrevendo as variáveis com valores "normais"
+# In[1]: Fórmula efeito da idade foliar com os valores reais definidos
 
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-def fa(µ, age_crit, leaf_age):
+def fa (µ, age_crit, leaf_age):
     return min(1, math.exp(µ * (age_crit - leaf_age)))
 
-µ = [-0.4, 1, 0.6]   #original 12/30/20    umol CO2 m2 s-1
+#penalização da fotossíntese pra cada coorte
+µ = [-0.4, 1, 0.6]     #original 12/30/20    umol CO2 m2 s-1
 print("young leaf:", µ[0])
 print("mature leaf:", µ[1])
 print("old leaf:", µ[2])
 
 print("\n")
 
-age_crit = 4    #anos   #range
-#a_crit = np.linspace(start = 0.1, stop = 8.3, num = 100)
-#print(acrit)
+#age_crit será derivado do tempo de residência do carbono (trait variante do modelo)
+tresid = 6                       #anos   #variante 
+age_crit = tresid / 3 * 2        #anos
+print(age_crit)
 
-leaf_age = [age_crit/2, age_crit/2 *2, age_crit/2 *3]   #original 1/2/3       #meses ou anos
-print("young leaf:", leaf_age[0])
-print("mature leaf:", leaf_age[1])
-print("old leaf:", leaf_age[2])
+print("\n")
+
+#calculando a idade limite de cada coorte 
+age_limit = [age_crit/2, age_crit, age_crit/2 *3]  #meses ou anos
+print("young leaf limit:", age_limit[0])
+print("mature leaf limit :", age_limit[1])
+print("old leaf limit :", age_limit[2])
+
+print("\n")
+
+#preciso criar uma função pra pegar a idade do meio de cada range das coortes
+#não consegui fazer isso
+leaf_age = [1, 3, 5]
+print("young leaf age:", leaf_age[0])
+print("mature leaf age:", leaf_age[1])
+print("old leaf age:", leaf_age[2])
+
+print("\n")
 
 #contabilizando o tempo em escala anual
-
-for age in leaf_age:
-    if(age > age_crit):
+for age in age_limit:
+    if(age <= age_limit[0]):
         # Penalizar a fotossíntese para folhas que tem até 2 anos.
-        print('ok')
-        #print (fa(µ[0],age_crit,leaf_age[0]))
-  #      pass
-   # elif(age_crit >= leaf_age[0] and age_crit < leaf_age[2]):
+        print (fa(µ[0],age_crit,leaf_age[0]))
+        pass
+    elif(age > age_limit[0] and age <= age_limit[1]):
         # Penalizar a fotossíntese para folhas que tem de 2 até 4 anos.
-   #     print (fa(µ[1],age_crit,leaf_age[1]))
-   #     pass
-   # elif(age_crit >= leaf_age[1] and age_crit <= leaf_age[2]):
+        print (fa(µ[1],age_crit,leaf_age[1]))
+        pass
+    elif(age > age_limit[1] and age <= age_limit[2]):
         # Penalizar a fcotossíntese para folhas que tem de 4 até 6 anos.
-   #     print (fa(µ[2],age_crit,leaf_age[2]))
-    #    pass
-   # else:
-    #    print (f"A folha está morta {leaf_age}")
+        print (fa(µ[2],age_crit,leaf_age[2]))
+        pass
+    else:
+        print (f"A folha está morta")
