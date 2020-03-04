@@ -2,13 +2,15 @@
 #TESTE COM VALORES REAIS E FIXOS FUNCIONANDO 
 ############################################
 
-# %% teste LLS 6 anos
+# In[1]: teste LLS 6 anos (sequencia de idades)
 import matplotlib.pyplot as plt
-import numpy as np
 import math
 def fa(u, acrit, a):
     #return min(1,math.exp(u*(acrit-a)))
     return min(1,math.exp(u*(acrit-a)))
+
+print("TESTE LLS 6 ANOS")
+print("\n")
 
 acrit = 4 
 leaf_age = [acrit / 2, acrit / 2 * 2, acrit / 2 * 3]  #years
@@ -33,7 +35,7 @@ print (fa(u,acrit,a))
 
 u = -0.4           #umol CO2 m2 S-1  
 acrit = 4         #year
-a = 1.9            #year
+a = 2            #year
 print (fa(u,acrit,a))
 print("\n")
 
@@ -69,22 +71,32 @@ u = 0.6            #umol CO2 m2 S-1
 acrit = 4         #year
 a = 6            #year
 print (fa(u,acrit,a))
-print("\n")
-
 print ("folhas morreram")
 
+#gráfico
+age = [0.5, 1, 1.5, 2, 3, 4, 4.5, 5, 5.5, 6]
+fa = [0.24659696394160643, 0.301194211912202, 0.36787944117144233, 0.4317105234290797, 1, 1, 0.7408182206817179, 0.5488116360940264, 0.40656965974059917, 0.30119421191220214]
+plt.plot(age, fa)
+plt.title('fa vs age com LLS de 6 anos')
+plt.xlabel('leaf age')
+plt.ylabel('fa')
+plt.show()
 
-# %% teste LLS 3 anos
+print("\n")
+print("\n")
 
+# In[2]: teste LLS 3 anos (sequência de idades)
+import matplotlib.pyplot as plt
 import math
 def fa(u, acrit, a):
     #return min(1,math.exp(u*(acrit-a)))
     return min(1,math.exp(u*(acrit-a)))
 
+print("TESTE LLS 3 ANOS")
+print("\n")
 acrit = 2
 leaf_age = [acrit / 2, acrit / 2 * 2, acrit / 2 * 3]  #years
 print(leaf_age)
-
 print("\n")
 
 print("folhas jovens")
@@ -105,10 +117,11 @@ print (fa(u,acrit,a))
 
 u = -0.4           #umol CO2 m2 S-1  
 acrit = 2         #year
-a = 0.9            #year
+a = 1            #year
 print (fa(u,acrit,a))
 print("\n")
 
+print("folhas maduras")
 u = 1              #umol CO2 m2 S-1  
 acrit = 2         #year
 a = 1.5          #year
@@ -140,17 +153,29 @@ u = 0.6            #umol CO2 m2 S-1
 acrit = 2         #year
 a = 3            #year
 print (fa(u,acrit,a))
-
 print ("folhas morreram")
 
+#gráfico
+age = [0.3, 0.5, 0.7, 1, 1.5, 2, 2.3, 2.5, 2.7, 3]
+fa = [0.5066169923655895, 0.5488116360940264, 0.5945205479701944, 0.6440364210831413, 1, 1, 0.8352702114112721, 0.7408182206817179, 0.6570468198150567, 0.5488116360940264]
+plt.plot(age, fa)
+plt.title('fa vs age com LLS de 3 anos')
+plt.xlabel('leaf age')
+plt.ylabel('fa')
+plt.show()
 
-# %% LLS 6 acrit 4 com médias de 'a'
+print("\n")
+print("\n")
 
+# In[3]: teste com LLS 6 (com médias de 'a')
+import matplotlib.pyplot as plt
 import math
 def fa(u, acrit, a):
     #return min(1,math.exp(u*(acrit-a)))
     return min(1,math.exp(u*(acrit-a)))
-    
+
+print("TESTE LLS 6 ANOS")
+
 u = -0.4           #umol CO2 m2 S-1  
 acrit = 4         #year
 a = 1            #year
@@ -165,8 +190,27 @@ u = 0.6            #umol CO2 m2 S-1
 acrit = 4         #year
 a = 5            #year
 print (fa(u,acrit,a))
+print ("folhas morreram")
 
-# %% LLS 3 acrit 2 com médias de 'a'
+#gráfico
+age = [1, 3, 5]
+fa = [0.301194211912202, 1, 0.5488116360940264]
+plt.plot(age, fa)
+plt.title('fa vs age com LLS de 6 anos')
+plt.xlabel('leaf age')
+plt.ylabel('fa')
+plt.show()
+
+print("\n")
+
+# In[4]: teste com LLS 3 (com médias de 'a')
+import matplotlib.pyplot as plt
+import math
+def fa(u, acrit, a):
+    #return min(1,math.exp(u*(acrit-a)))
+    return min(1,math.exp(u*(acrit-a)))
+
+print("TESTE LLS 3 ANOS")
 
 u = -0.4            #umol CO2 m2 S-1  
 acrit = 2          #year
@@ -182,160 +226,18 @@ u = 0.6            #umol CO2 m2 S-1
 acrit = 2         #year
 a = 2.5          #year
 print (fa(u,acrit,a))
+print ("folhas morreram")
+
+age = [0.5, 1.5, 2.5]
+fa = [0.5488116360940264, 1, 0.7408182206817179]
+plt.plot(age, fa)
+plt.title('fa vs age com LLS de 3 anos')
+plt.xlabel('leaf age')
+plt.ylabel('fa')
+plt.show()
 
 
-
-
-
-####################################################
-#TESTE CASO VALORES FOSSSEM DE 0 A 1 POR COEFICIENTE
-####################################################
-# %% teste coef
-import math
-import numpy as np 
-
-def fa(u, acrit, a):
-    return min(1,math.exp(u*(acrit-a)))
-
-def value_recalc(rest_time):
-    return 0.03 * rest_time
-
-u = 30   
-a = 3     
-acrit = 4
-
-value_recalc(u) 
-print(value_recalc(u))
-
-value_recalc(acrit)
-print(value_recalc(acrit))
-
-value_recalc(a)
-print(value_recalc(a))
-
-print(fa(value_recalc(u), value_recalc(acrit), value_recalc(a)))
-
-
-
-
-
-############################################
-#TESTE CASO VALORES FOSSEM DE 0 A 1 "NA MÃO"
-############################################
-# %% teste velho com valores de u e 'a' definidos para testar o acrit
-#confirmado q tem que ser inversamente proporcional
-
-import math
-def fa(u, acrit, a):
-    return min(1,math.exp(u*(acrit-a)))
-
-u = 0.4
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 1
-
-print (fa(u, acrit, a))
-
-u = 0.4
-acrit = 0.2 #idade 2 anos (LLS=3) num range de 0 a 10
-a = 1
-
-print (fa(u, acrit, a))
-
-# %% teste com valores de u e acrit definidos para testar o 'a'
-import math
-def fa(u, acrit, a):
-    return min(1,math.exp(u*(acrit-a)))
-
-#teste jovem
-u = 0.6
-acrit = 0.4
-a = 2
-
-print (fa(u, acrit, a))
-
-#teste maduro
-u = 0
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 0
-
-print (fa(u, acrit, a))
-
-#teste velho
-u = 0.4
-acrit = 0.4
-a = 1
-
-print (fa(u, acrit, a))
-
-# %% teste com valores de acrit e 'a' definidos para testar a ordem do u
-#tem que ser inversamente proporcional também pelo visto 
-#então o 0.6 vai pra jovem e o 0.4 para velho e maduro vai para 0... ??
-
-import math
-def fa(u, acrit, a):
-    return min(1,math.exp(u*(acrit-a)))
-
-# u jovem sendo 0.6
-u = 0.6
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 2
-
-print (fa(u, acrit, a))
-
-# u jovem sendo 0.4
-u = 0.4
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 2
-
-print (fa(u, acrit, a))
-print("\n")
-# u maduro sendo 0 
-u = 0
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 2 #alterando para 2 só para ver o resultado
-
-print (fa(u, acrit, a))
-
-#u maduro sendo 1 
-u = 1
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 2 
-
-print (fa(u, acrit, a))
-
-# u velho sendo 0.4 
-u = 0.4
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 1 #alterando para 2 só para ver o resultado
-
-print (fa(u, acrit, a))
-
-#u maduro sendo 0.6 
-u = 0.6
-acrit = 0.4 #idade 4 anos (LLS=6) num range de 0 a 10
-a = 1 
-
-print (fa(u, acrit, a))
-
-# %% teste com vcmax em photons
-import math
-def fa(u, acrit, a):
-    return min(1,math.exp(u*(acrit-a)))
     
-#não vale a pena 
-# u jovem sendo 0.6
-u = 0.0100
-acrit = 0.7 #idade de 3 anos num range de 0 a 10
-a = 2
-
-print (fa(u, acrit, a))
-
-# u jovem sendo 0.4
-u = 0.0256
-acrit = 0.7 #idade de 3 anos num range de 0 a 10
-a = 2
-
-print (fa(u, acrit, a))
 
 
 #a_crit = np.linspace(start = 0.1, stop = 8.3, num = 100)
