@@ -14,7 +14,7 @@ print("mature leaf:", mu[1])
 print("old leaf:", mu[2])
 
 print("\n")
-
+ 
 #age_crit será derivado do tempo de residência do carbono (trait variante do modelo)
 tresid = 6                       #anos   #variante 
 age_crit = tresid / 3 * 2        #anos
