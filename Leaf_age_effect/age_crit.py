@@ -28,16 +28,14 @@ print("young leaf limit:", age_limit[0])
 print("mature leaf limit:", age_limit[1])
 print("old leaf limit:", age_limit[2])
 
-print("\n")
-
 #preciso criar uma função pra pegar a idade do meio de cada range das coortes
 #não consegui fazer isso
-leaf_age = [1, 3, 5]
-print("young leaf age:", leaf_age[0])
-print("mature leaf age:", leaf_age[1])
-print("old leaf age:", leaf_age[2])
-
-print("\n")
+leaf_age = []
+for index, value in enumerate(age_limit):
+    if index == 0:
+        leaf_age.append((0 + age_limit[index]) / 2)
+    else:
+        leaf_age.append((age_limit[index] + age_limit[index - 1]) / 2
 
 #contabilizando o tempo em escala anual
 for age in age_limit:

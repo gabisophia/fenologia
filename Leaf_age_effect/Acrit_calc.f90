@@ -36,19 +36,23 @@ contains
    !=================================================================
    !=================================================================
 
-   function leaf_age_factor(dec_photo, acrit, leaf_age) result(age_factor)
+   function leaf_age_factor(umol_penalty, age_crit, leaf_age) result(age_factor)
       ! Returns leaf age factor 
       use types, only: r_4
       !implicit none
 
-      real(r_4),intent(in) :: dec_photo         !years-1     !decay constant of photosynthesis with age 
-      real(r_4),intent(in) :: acrit             !years      !age after whith leaves start ageing
-      real(r_4),intent(in) :: leaf_age          !years
+      real(r_4),intent(in) :: umol_penalty         !umol CO2 m2 s-1    !decay constant of photosynthesis with age 
+      real(r_4),intent(in) :: age_crit             !years              !idade máxima em que a folha mantém sua capacidade fotossinética máxima
+      real(r_4),intent(in) :: leaf_age             !years
       real(r_4) :: age_factor
 
-      data dec_photo1/0,1,2,3,4,5,6,7,8/,dec_photo2/1/,dec_photo3/0,1,2,3/
+      real(r_4) :: age_crit      # trait derivado do t de resid
+      real(r_4) :: age_limits    # idades limites de cada coorte
+      real(r_4) :: leaf_age      # idade média de cada coorte para aplicar no cálculo
 
-      age_factor = exp(dec_photo * (acrit-leaf_age)   
+      data umol_penalty1/-0.4/, umol_penalty2/1/, umol_penalty3/0.6/
+
+      age_factor = exp(umol_penalty * (age_crit-leaf_age)   
       age_factor = 1.0 - age_factor
 
    end function leag_age_factor
