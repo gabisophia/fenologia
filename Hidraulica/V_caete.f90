@@ -14,3 +14,4 @@ function xylem_conductance(Psi_soil, Psi_g, P50, vulnerability_curve) result(V) 
     V = 1.0 / (1.0 + ((Psi_solo - Psi_g) / P50) ** vulnerability_curve)
 
  end function
+
