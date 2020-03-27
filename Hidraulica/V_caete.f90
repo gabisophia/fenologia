@@ -40,3 +40,55 @@
     xym_conduct = 1.0 / (1.0 + ((psi_soil - psi_g) / psi_50) ** vulnerability_curve)
 
     end function
+
+    !=================================================================
+    !=================================================================
+
+    !tentar implementar o xym_conduct no lugar do W na esquação do L[ep] (suprimento pot. pra transp.)
+   
+    function water_stress_modifier(xym_conduct, cfroot, rc, ep) result(f5)
+       use types, only: r_4, r_8
+       use global_par, only: csru, wmax, alfm, gm, rcmin
+       !implicit none
+ 
+       !não sei se tem que declarar aqui, mas acho que não
+       real(r_4),intent(in) :: xym_conduct      ! maximum xilem condutance mm
+       real(r_8),intent(in) :: cfroot !carbon in fine roots kg m-2
+       real(r_4),intent(in) :: rc     !Canopy resistence 1/(micromol(CO2) m-2 s-1)
+       real(r_4),intent(in) :: ep     !potential evapotranspiration
+       real(r_4) :: f5
+ 
+ 
+       real(r_8) :: pt
+       real(r_8) :: gc
+       real(r_8) :: wa
+       real(r_8) :: d
+       real(r_8) :: f5_64
+
+       wa = w/wmax
+ 
+       xym_conduct = xylem_conductance(psi_xym, psi_50, vulnerability_curve, h)
+ 
+       pt = csru*(cfroot*1000.) * xym_conduct  !(based in Pavlick et al. 2013; *1000. converts kgC/m2 to gC/m2)
+       if(rc .gt. 0.0) then
+          gc = (1.0/(rc * 1.15741e-08))  ! s/m
+       else
+          gc =  1.0/(rcmin * 1.15741e-08) ! BIANCA E HELENA - Mudei este esquema..   
+       endif                  
+ 
+       !d =(ep * alfm) / (1. + gm/gc) !(based in Gerten et al. 2004)
+       d = (ep * alfm) / (1. + (gm/gc))
+       if(d .gt. 0.0) then
+          f5_64 = pt/d
+          f5_64 = exp(-0.1 * f5_64)
+          f5_64 = 1.0 - f5_64
+       else
+          f5_64 = wa      !não troquei p/ xym_conduct
+       endif
+ 
+       f5 = real(f5_64,4)      
+    end function water_stress_modifier
+ 
+    !=================================================================
+    !=================================================================
+ 
