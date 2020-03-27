@@ -56,7 +56,7 @@
        real(r_8),intent(in) :: cfroot !carbon in fine roots kg m-2
        real(r_4),intent(in) :: rc     !Canopy resistence 1/(micromol(CO2) m-2 s-1)
        real(r_4),intent(in) :: ep     !potential evapotranspiration
-       real(r_4) :: f5
+       real(r_4) :: f5S
  
  
        real(r_8) :: pt
