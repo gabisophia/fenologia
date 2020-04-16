@@ -40,6 +40,13 @@
 
     xym_conduct = 1.0 / (1.0 + ((psi_soil - psi_g) / psi_50) ** vulnerability_curve)
 
+    !embolism mortality
+    if (xym_conduct .le. 0.12) then 
+       no_cell = .true.  !PLS die
+
+       !or
+       ! P88=7.33^(1/a)*P50 calc
+
     end function
 
     !=================================================================
