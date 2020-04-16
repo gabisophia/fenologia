@@ -1,9 +1,10 @@
-!escrevendo fórmula V para o modelo
+!escrevendo fórmula K para o modelo
 
     function soil_potential(theta_sat, psi_sat, b) result(psi_soil)
         ! Returns soil water potential
         use types
-
+      
+        !puxar arquivos globais
         real(r_4),intent(in) :: theta_sat           !g H20/g solo 
         real(r_4),intent(in) :: psi_sat             !MPa
         real(r_4),intent(in) :: b                   !S/ unidade
@@ -26,7 +27,7 @@
     use global_par, only:rho, g, vulnerability_curve
 
     real(r_4), intent(in) :: psi_solo, psi_g, psi_50, vulnerability_curve
-    real(r_4) :: xym_conduct
+    real(r_4) :: xym_conduct   !mmol m-2 s-1 MPa-1
 
     real(r_4) :: psi_g
     real(r_4) ::       
@@ -52,7 +53,7 @@
        !implicit none
  
        !não sei se tem que declarar aqui, mas acho que não
-       real(r_4),intent(in) :: xym_conduct      ! maximum xilem condutance mm
+       real(r_4),intent(in) :: xym_conduct      ! maximum xylem condutance mm
        real(r_8),intent(in) :: cfroot !carbon in fine roots kg m-2
        real(r_4),intent(in) :: rc     !Canopy resistence 1/(micromol(CO2) m-2 s-1)
        real(r_4),intent(in) :: ep     !potential evapotranspiration
@@ -65,7 +66,7 @@
        real(r_8) :: d
        real(r_8) :: f5_64
 
-       wa = w/wmax
+       wa = w/wmax   !tirar? "f5_64=wa"
  
        xym_conduct = xylem_conductance(psi_xym, psi_50, vulnerability_curve, h)
  

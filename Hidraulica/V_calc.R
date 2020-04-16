@@ -26,7 +26,14 @@ V=1/(1+((Psi_solo-Psi_g)/P50)^a)
 plot(V~Psi_solo,type="l", ylim=c(0,1))
 plot(V~I(theta/theta_sat),type="l", ylim=c(0,1))
 
-
+#Analytical solution to calculate P88 from P50
+P50 = -3.5
+a = 4
+  #  P88fun<-function(P50,a) {
+    P88=7.33^(1/a)*P50
+  #}
   
+  print(P88)
+    
   
 
