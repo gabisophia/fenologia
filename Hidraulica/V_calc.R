@@ -12,7 +12,7 @@ plot(Psi_solo~I(theta/theta_sat),type="l")
 
 # Parametros hidr�ulicos da plantas 
 P50=-2 #MPa
-a=4 #sem unidade  
+a=4 #sem unidade
 
 # Calculo de V (equa��o de Manzoni et al 2013 - Biological constraints on water transport in the soil-plant-atmosphere system)
 # se existir altura no modelo o efeito da gravidade no transporte de �gua pode incluido tbm
@@ -34,3 +34,6 @@ a = 4
   #}
   
   print(P88)
+    
+  
+
